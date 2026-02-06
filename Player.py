@@ -30,8 +30,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Randomizing player's location on initial conquered area
-        self.rect.x = choice(range(0, 40) + range(SCREEN_WIDTH-50, SCREEN_WIDTH-10))
-        self.rect.y = choice(range(0, SCREEN_HEIGHT-10))
+        self.rect.x = choice(
+            list(range(0, 40)) + list(range(SCREEN_WIDTH - 50, SCREEN_WIDTH - 10))
+        )
+        self.rect.y = choice(list(range(0, SCREEN_HEIGHT - 10)))
 
         self.points = []
         self.mask = pygame.mask.from_surface(self.image)
@@ -140,7 +142,7 @@ class Player(pygame.sprite.Sprite):
         polygon.update_mask()
 
     def is_self_destruct(self):  # Player overlaps itself
-        for i in xrange(len(self.points) - 3):
+        for i in range(len(self.points) - 3):
             x1, y1 = self.points[i]
             x2, y2 = self.points[i+1]
             if min(x1, x2) <= self.points[-1][0] <= max(x1, x2) and min(y1, y2) <= self.points[-1][1] <= max(y1, y2):

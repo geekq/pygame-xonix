@@ -12,8 +12,8 @@ pygame.init()   # initializing pygame
 # Constants
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
-list_of_colors = [(0, 0, i)for i in xrange(255)] + [(128, 0, j) for j in xrange(50,255, 5)] +\
-                 [(0, 128, t) for t in xrange(50, 255, 5)]
+list_of_colors = [(0, 0, i) for i in range(255)] + [(128, 0, j) for j in range(50, 255, 5)] +\
+                 [(0, 128, t) for t in range(50, 255, 5)]
 
 # Loading fonts
 BIG_FONT = pygame.font.Font("PressStart2P.ttf", 60)
@@ -72,7 +72,7 @@ class Game(object):
 
     def reset_balls(self):  # Reset balls and randomize their values (in defined range)
         self.balls.empty()
-        [self.balls.add(Ball(6, rand(self.min_vel, self.min_vel + self.dvel))) for i in xrange(self.num_of_balls)]
+        [self.balls.add(Ball(6, rand(self.min_vel, self.min_vel + self.dvel))) for i in range(self.num_of_balls)]
         self.balls.add(Ball(7, 2, False)) # self.min_vel + self.dvel, False))
 
     # Functions that make next levels harder
@@ -105,7 +105,7 @@ class Game(object):
         self.player = Player()
 
     def display_hearts(self):  # Displaying current number of lives on screen
-        for i in xrange(self.lives):
+        for i in range(self.lives):
             screen.blit(HEART_IMG, (10 + 35 * i, SCREEN_HEIGHT - HEART_IMG.get_size()[1] - 10))
 
     def exit(self):
@@ -210,7 +210,7 @@ try:
                 # Changing last point to player's position and displaying its trail
                 if len(g.player.points) > 1:
                     g.player.points[-1] = list(g.player.rect.center)
-                    for i in xrange(len(g.player.points) - 1):
+                    for i in range(len(g.player.points) - 1):
                         pygame.draw.line(screen, (255, 0, 0), g.player.points[i], g.player.points[i+1], 3)
                 screen.blit(g.player.image, g.player.rect)
             m.show1(screen)

@@ -32,7 +32,10 @@ class Ball(pygame.sprite.Sprite):
             self.color = (0, 0, 255)
             # If it is a ghost ball, let it be on a random section of the conquered area
             self.rect.x = rand(0, SCREEN_WIDTH - 1 - 2*radius)
-            self.rect.y = choice(range(0, 50 - 2*radius) + range(SCREEN_HEIGHT - 50, SCREEN_HEIGHT - 2*radius))
+            self.rect.y = choice(
+                list(range(0, 50 - 2 * radius)) +
+                list(range(SCREEN_HEIGHT - 50, SCREEN_HEIGHT - 2 * radius))
+            )
             pygame.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius, 2)
 
         self.mask = pygame.mask.from_surface(self.image)
@@ -49,33 +52,33 @@ class Ball(pygame.sprite.Sprite):
             self.kill()
             return
         if self.alive:
-            if self.rect.left + self.velocity_x / 2 < 0 or self.rect.right + self.velocity_x / 2 > size[0] - 1:
+            if self.rect.left + self.velocity_x // 2 < 0 or self.rect.right + self.velocity_x // 2 > size[0] - 1:
                 self.velocity_x *= -1
-            if self.rect.top + self.velocity_y / 2 < 0 or self.rect.bottom + self.velocity_y / 2 > size[1] - 1:
+            if self.rect.top + self.velocity_y // 2 < 0 or self.rect.bottom + self.velocity_y // 2 > size[1] - 1:
                 self.velocity_y *= -1
             if self.collide_x(polygon):
                 self.velocity_x *= -1
             if self.collide_y(polygon):
                 self.velocity_y *= -1
-            self.rect.x += self.velocity_x / 2
-            self.rect.y += self.velocity_y / 2
+            self.rect.x += self.velocity_x // 2
+            self.rect.y += self.velocity_y // 2
         else:
-            if self.rect.left + self.velocity_x / 2 < 0 or self.rect.right + self.velocity_x / 2 > size[0] - 1:
+            if self.rect.left + self.velocity_x // 2 < 0 or self.rect.right + self.velocity_x // 2 > size[0] - 1:
                 self.velocity_x *= -1
-            if self.rect.top + self.velocity_y / 2 < 0 or self.rect.bottom + self.velocity_y / 2 > size[1] - 1:
+            if self.rect.top + self.velocity_y // 2 < 0 or self.rect.bottom + self.velocity_y // 2 > size[1] - 1:
                 self.velocity_y *= -1
             if self.collide_x(polygon.polygon_inverse):
                 self.velocity_x *= -1
             if self.collide_y(polygon.polygon_inverse):
                 self.velocity_y *= -1
-            self.rect.x += self.velocity_x / 2
-            self.rect.y += self.velocity_y / 2
+            self.rect.x += self.velocity_x // 2
+            self.rect.y += self.velocity_y // 2
 
     # To take advantage of pygame's collision functions, we needed two to make sure where the collision is coming from
     def collide_x(self, sprite):
         original = self.rect.x
         collision = False
-        self.rect.x += self.velocity_x / 2
+        self.rect.x += self.velocity_x // 2
         if pygame.sprite.collide_mask(self, sprite):
             collision = True
         self.rect.x = original
@@ -84,7 +87,7 @@ class Ball(pygame.sprite.Sprite):
     def collide_y(self, sprite):
         original = self.rect.y
         collision = False
-        self.rect.y += self.velocity_y / 2
+        self.rect.y += self.velocity_y // 2
         if pygame.sprite.collide_mask(self, sprite):
             collision = True
         self.rect.y = original
@@ -92,7 +95,7 @@ class Ball(pygame.sprite.Sprite):
 
     # Check if ball has hit a line in the player's trail (by a list of points)
     def on_line(self, points):
-        for i in xrange(len(points) - 1):
+        for i in range(len(points) - 1):
             if min(points[i][0], points[i+1][0]) <= self.rect.left <= max(points[i][0], points[i+1][0]) or \
                         min(points[i][0], points[i+1][0]) <= self.rect.right <= max(points[i][0], points[i+1][0]):
                 if abs(self.rect.centery - points[i][1]) < 5:

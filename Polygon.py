@@ -139,13 +139,13 @@ class Polygon(pygame.sprite.Sprite):
                     positive += 1
                 else:
                     negative += 1
-        print "Positive:", positive
-        print "Negative:", negative
+        print("Positive:", positive)
+        print("Negative:", negative)
         return 1 if positive < negative else 0
 
     # find the place where the trail divides up the screen (in different sections)
     def find_line(self, points, point, vertical):
-        for i in xrange(len(points) - 1):
+        for i in range(len(points) - 1):
                 if vertical:
                     if min(points[i][1], points[i+1][1]) <= point[1] <= max(points[i][1], points[i+1][1]):
                         return points[i][0]
@@ -158,4 +158,4 @@ class Polygon(pygame.sprite.Sprite):
             return random.choice(points)[1]
 
     def mid(self, p1, p2):
-        return (p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2
+        return (p1[0] + p2[0]) // 2, (p1[1] + p2[1]) // 2

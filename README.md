@@ -15,7 +15,7 @@ A game in the style of old Xonix, created in Python with PyGame.
 
 ## Prerequisites
 
-- [*Python*](https://www.python.org/downloads/) 2.7 installed
+- [*Python*](https://www.python.org/downloads/) 3 installed
 - [*pygame*](https://www.pygame.org/) library installed
 
 With pip, you can install *pygame* as following:
@@ -28,6 +28,3 @@ To start the game, run `Game.py`.
 ```
 >   python Game.py
 ```
-
-
-You're more than welcome to improve the game and add features! :-)
