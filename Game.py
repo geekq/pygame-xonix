@@ -73,7 +73,7 @@ class Game(object):
     def reset_balls(self):  # Reset balls and randomize their values (in defined range)
         self.balls.empty()
         [self.balls.add(Ball(6, rand(self.min_vel, self.min_vel + self.dvel))) for i in xrange(self.num_of_balls)]
-        self.balls.add(Ball(7, self.min_vel + self.dvel, False))
+        self.balls.add(Ball(7, 2, False)) # self.min_vel + self.dvel, False))
 
     # Functions that make next levels harder
     def increase_percentage(self):

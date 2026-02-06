@@ -45,14 +45,9 @@ class Ball(pygame.sprite.Sprite):
 
     def update(self, size, polygon):
         if polygon.contains(self) and self.alive:
-            #balls.remove(self)
-            self.alive = False
-            self.image.fill(WHITE)
-            pygame.draw.circle(self.image, (0, 0, 255), (self.radius, self.radius), self.radius, 2)
-            if self.velocity_x < 0:
-                self.velocity_x -= 3
-            else:
-                self.velocity_x += 3
+            # Remove ball instead of turning it into a ghost.
+            self.kill()
+            return
         if self.alive:
             if self.rect.left + self.velocity_x / 2 < 0 or self.rect.right + self.velocity_x / 2 > size[0] - 1:
                 self.velocity_x *= -1
